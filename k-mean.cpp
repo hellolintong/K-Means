@@ -59,11 +59,12 @@ template<typename T>
 class MyCompare
 {
 private:
-	OBJ mean;
+	const OBJ &mean;
 public: 
-	MyCompare(const OBJ &meanNode){
-		mean = meanNode;
+	MyCompare(const OBJ &meanNode) : mean(meanNode) 
+	{
 	}
+
 	bool operator()(const T &x, const T &y){
 		if(Kdistance(x , mean) < Kdistance(y , mean)){
 			return true;
@@ -90,10 +91,9 @@ uint  KMean::GetMinDis(uint i){
 		}
 	}
 	}*/
-	vector <OBJ> :: iterator pos ;
 	MyCompare < OBJ > myCompare( pAllObj->at(i) );
 
-	pos = min_element(MeanObj.begin() , MeanObj.end(), myCompare);
+	vector <OBJ> :: iterator pos = min_element(MeanObj.begin() , MeanObj.end(), myCompare);
 
 
 	return pos - MeanObj.begin();
@@ -134,7 +134,7 @@ double Kdistance(const OBJ &first, const OBJ &second)
 		//不用pow。直接相乘
 		distance += (first.attrs[i] - second.attrs[i]) * (first.attrs[i] - second.attrs[i]);
 	}
-	distance = sqrt(distance);
+	//distance = sqrt(distance);
 	return distance;
 }
 
