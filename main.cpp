@@ -1,5 +1,3 @@
-#include "k-mean.h"
-#include "node.h"
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
@@ -8,6 +6,9 @@
 #include <vector>
 #include <ios>
 #include "dmatfile.h"
+#include "k-mean.h"
+#include "node.h"
+#include "pam.h"
 
 using namespace std;
 
@@ -41,11 +42,12 @@ int main()
 	cin >> fTermNum;
 	vector<OBJ> objData;
 
-	if(! GetData("mov.dmat", objData) ){
+	if(! GetData("wine.dmat", objData) ){
 		return -1;
 	}
-
-	KMean kmean(nClusterNum, &objData);
-	kmean.Start(fTermNum);
+	PAM pam(nClusterNum, &objData);
+	pam.Start();
+	//KMean kmean(nClusterNum, &objData);
+	//kmean.Start(fTermNum);
 	return 0;
 }

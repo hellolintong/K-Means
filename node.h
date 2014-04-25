@@ -1,30 +1,21 @@
-#ifndef NODE_HEAD
-#define NODE_HEAD
+#pragma  once
 #include <vector>
 #include <map>
-
-//OBJECT里面的类型
-typedef double DATA_TYPE ;
+ 
+typedef double DATA_TYPE ;//define data type
 typedef unsigned int uint;
 
-
-//定义node
+//user define object struct
 typedef struct OBJ{
 	std::vector<DATA_TYPE> attrs;
 }OBJ;
 
-//一个簇包含object的下标
-typedef std::vector<uint> CLUSTER;
 
-//聚类的结构。
-typedef std::vector<CLUSTER>  VEC_CLUSTER;;
+typedef std::vector<uint> CLUSTER;//a cluster include the index of object vector
 
-//object到cluster的映射
-//key为object下标。value为cluster下标
+
+typedef std::vector<CLUSTER>  VEC_CLUSTER;//cluster structure
+
+//object map to cluster
+// key is the object index, value is the cluster index
 typedef std::map<uint, uint> OBJ_MAP;
-
-//node 比较函数，first == second 返回 0, first > second.返回1。 first < second.返回-1
-// 避免点之间的比较（会有性能上的代价）
-//int MyCompare(const Node &first, const Node &second);
-
-#endif

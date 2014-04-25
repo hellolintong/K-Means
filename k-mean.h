@@ -1,34 +1,30 @@
 //k-mean.h
-#ifndef KMEAN_HEAD
-#define KMEAN_HEAD
+#pragma once
 
 #include <vector>
 #include <map>
 #include <string>
 #include "node.h"
 
-double Kdistance(const OBJ &first, const OBJ &second);//求取两个点之间的距离
+static double Kdistance(const OBJ &first, const OBJ &second);
 
 class KMean
 {
 public:
-    KMean(uint nClusterNum, const std::vector<OBJ> *pVector);
-	void Start(double TermDistance);//启动k均值算法
+	KMean(uint nClusterNum, const std::vector<OBJ> *pVector);
+	void Start(double TermDistance);//start k-mean algorithm
 private:
-	/*类数据成员定义*/
-	uint nClusterNum;//生成的簇的数量。
-	const std:: vector<OBJ> *pAllObj;//所有的对象
-	VEC_CLUSTER Cluster;//簇
-	OBJ_MAP ClusterMap;//簇和对象之间的映射
-	std::vector<OBJ> MeanObj;//均值点对象容器
+	/*class member define*/
+	uint nClusterNum;//cluster number
+	const std:: vector<OBJ> *pAllObj;//all object
+	VEC_CLUSTER Cluster;//cluster 
+	OBJ_MAP ClusterMap;//object map to cluster
+	std::vector<OBJ> MeanObj;//mean object vector
 
-	/*类方法定义*/
-	uint GetMinDis(uint i);//获取某个点离那个中心点最近距离
-	void Init();//初始化函数（首先随即生成代表点）
-	void AssignObj();//将所有点分配到不同的簇中
-	void GetMean(uint cluster_index, OBJ &AverNode);
-
-	void OutputData(const std::string fileName);//将数据输出
-
+	/*class function*/
+	uint GetMinDis(uint i);//get the shortest distance between the given index and all mean objects
+	void Init();//init function
+	void AssignObj();//assign all object to cluster
+	void GetMean(uint cluster_index, OBJ &AverNode);//get mean object
+	void OutputData(const std::string fileName);//output data
 };
-#endif // KMEAN_HEAD
