@@ -16,7 +16,7 @@ public:
 		PAM(uint nClusterNum, const std::vector<OBJ> *pVector);
 		void Start();//start the PAM algorithm
 		
-private:
+protected:
 	uint nClusterNum;//cluster numbers
 	double cost;
 	const std:: vector<OBJ> *pAllObj;//all the objects
@@ -27,7 +27,7 @@ private:
 	DISTRECORD objDisRecord;//record the distance between objects
 	std::vector< uint > randomVec;//random number vector
 
-	void Init();	//fill data vector
+	void Init();//fill data vector
 	void AssignObj();//assign objects to different cluster
 	void ClusterProcess();//cluster process
 	double CalCost(uint i, uint j);//calculate the exchange object cost, return the least cost object id

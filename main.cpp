@@ -5,10 +5,12 @@
 #include <string>
 #include <vector>
 #include <ios>
+#include <ctime>
 #include "dmatfile.h"
 #include "k-mean.h"
 #include "node.h"
 #include "pam.h"
+#include "clarans.h"
 
 using namespace std;
 
@@ -34,6 +36,7 @@ bool GetData(const string fileName, vector<OBJ> &objData){
 
 int main()
 {
+	srand(uint(time(0)));
 	uint  nClusterNum = 0;
 	float fTermNum = 0.0;
 	cout << "请输入类的数量"<<endl;
@@ -42,12 +45,23 @@ int main()
 	cin >> fTermNum;
 	vector<OBJ> objData;
 
-	if(! GetData("wine.dmat", objData) ){
+	if(! GetData("iris.dmat", objData) ){
 		return -1;
 	}
-	PAM pam(nClusterNum, &objData);
-	pam.Start();
+	//PAM pam(nClusterNum, &objData);
+	//pam.Start();
 	//KMean kmean(nClusterNum, &objData);
 	//kmean.Start(fTermNum);
+	
+	uint numLocal;
+	uint maxNeighbor;
+	cout << "输入 numLocal值:"<< endl;
+	cin >> numLocal;
+	cout << "输入 maxNeighbor值:"<<endl;
+	cin >> maxNeighbor;
+
+	CLARANS clarans(nClusterNum, &objData, numLocal, maxNeighbor);
+	clarans.Start();
+	
 	return 0;
 }
